@@ -1,44 +1,17 @@
 extern crate reqwest;
 use http::{Request, Response};
-use std::collections::HashMap;
+use serde_json::{Result, Value};
+use rand::Rng;
 
-pub fn getGiphy(text: String) -> Result<(), Box<std::error::Error>> {
+pub fn getGiphy(text: String) {
     let uri = format!("http://api.giphy.com/v1/gifs/search?api_key=Y99QRjzrSNP0HucWPPtXMnNJh3ERdf1o&q={}", text);
-    let body = reqwest::get("http://api.giphy.com/v1/gifs/search?api_key=Y99QRjzrSNP0HucWPPtXMnNJh3ERdf1o&q=rust")?
-    .text()?;
-
-    println!("{:#?}", body);
-    Ok(())
+    let body = reqwest::get(&uri).unwrap()
+    .text().unwrap();
+    getJson(&body)
 }
 
-
-// pub fn getGiphy(text: String) {
-//     // let mut request = Request::builder();
-//     // request.uri("http://api.giphy.com/v1/gifs/search?api_key=Y99QRjzrSNP0HucWPPtXMnNJh3ERdf1o&q={}", text);
-//     // let response = send(request.body(()).unwrap());
-//     // println!("response{}", response);
-
-
-
-//     // let request = Request::builder()
-//     //   .uri(uri)
-//     //   .body(())
-//     //   .unwrap();
-
-//     // println!("request{:#?}", request);
-
-
-
-
-// //   const url = `http://api.giphy.com/v1/gifs/search?api_key=Y99QRjzrSNP0HucWPPtXMnNJh3ERdf1o&q=${text}`
-// //   const giphy = await getJson2(url)
-// //   return giphy
-// }
-
-
-
-// fn respond_to(req: Request<()>) -> http::Result<Response<()>> {
-//     let body = req.body();
-//     println!(body)
-//     // ...
-// }
+fn getJson(data: &str) {
+    let v: Value = serde_json::from_str(data).unwrap();
+    let mut rng = rand::thread_rng();
+    println!("The data is {}", v["data"][rng.gen_range(0, 25)]["images"]["original"]["url"]);
+}
