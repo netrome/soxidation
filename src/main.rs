@@ -1,5 +1,5 @@
 mod giphy;
 
 fn main() {
-    giphy::getGiphy("rust".to_string());
+    giphy::getGiphy("kitten".to_string());
 }
