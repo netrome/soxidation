@@ -6,6 +6,6 @@ Make sure you have python, pip and rust installed.
 
 ```bash
 git clone https://github.com/BirgerMoell/soxidation
-pip install gif-for-cli
+pip3 install gif-for-cli
 cargo run
 ```
