@@ -1,7 +1,11 @@
 [package]
 name = "soxidation"
 version = "0.1.0"
-authors = ["Mårten Nilsson <m@martennilsson.se>"]
+authors = ["Mårten Nilsson <m@martennilsson.se> Birger Moëll <birgermoell@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+http = "0.1.17"
+reqwest = "0.9.17"
+serde_json = "1.0.39"
+rand = "0.6.5"
